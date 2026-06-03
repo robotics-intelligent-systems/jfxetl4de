@@ -1,2 +1,3 @@
-# jfxetl4de
-ETL Tools for Data Engineering 
+# ETL Tools for Data Engineering 
+
+jOOQ library that generates Java code from your database metadata. Hibernate ORM. Pipedream is an integration platform for developers. Tridion Open Data Framework based on OData standard. Apache DolphinScheduler is the modern data orchestration platform. Spring Batch is a framework for writing batch applications. DuckDB is an analytical in-process SQL database management system. SQLines Database Migration Tools. Flyway is a database-migration tool. Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines. Apache SeaweedFS is a fast distributed storage system. Airbyte is a data integration platform.
