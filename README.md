@@ -8,3 +8,77 @@ The directory structure includes a specific folder for each phase of development
   - __CAD__: For computer-aided design.
   - __CAM__: Dedicated to the part manufacturing and assembly process.
   - __CAS__: For simulation of end-to-end functionality and performance analysis.
+  
+# Free Software Dependencies
+
+This document details the free and open-source software (FOSS) packages, libraries, and tools used in this project. It also includes their versions and corresponding license types to ensure legal compliance.
+
+## 📌 License Summary
+* **Permissive Licenses (MIT, Apache 2.0):** X packages.
+
+* **Weak Licenses / Copyleft (LGPL, MPL):** X packages.
+
+* **Strong Licenses (GPL):** X packages.
+
+---
+
+## 🛠️ System Dependencies
+Global tools or environments required to run the project.
+
+* **[Tool/Environment Name]**
+
+* **Required Version:** >= X.X.X
+
+* **License:** [e.g., MIT / Apache 2.0 / GPLv3]
+
+* **Description:** Brief explanation of its use in the project.
+
+* **Link:** [Official website or repository]
+
+---
+
+## 📦 Production (Runtime) Dependencies
+Packages that are compiled or run directly in the production environment.
+
+| Package | Version | License | Description / Use |
+
+| :--- | :---: | :---: | :--- |
+
+**[Package-Name-1]** | `^1.2.3` | MIT | HTTP request handling. |
+
+
+**[Package-Name-2]** | `~4.0.0` | Apache 2.0 | Data processing and analysis. |
+
+
+**[Package-Name-3]** | `>=2.5` | BSD 3-Clause | Graphical interface and visual components. |
+
+---
+
+## 🧪 Development Dependencies (DevDependencies)
+Tools used only during the development, testing, or compilation phases.
+
+| Package | Version | License | Description / Use |
+
+| :--- | :---: | :---: | :--- |
+
+**[Testing-Tool]** | `^5.0.0` | MIT | Framework for unit testing. |
+
+**[Linter/Linter-Name]** | `^8.0.0` | Ext-MIT | Code formatting and static analysis. |
+
+---
+
+## ⚖️ Compliance and Auditing
+To verify and keep this project's licenses up to date, we use the following automation tools:
+
+* **Vulnerability Audits:** `[e.g., npm audit / pip-audit / cargo audit]`
+* **License Scans:** `[e.g., FOSSA / LicenseFinder / Snyk]`
+
+---
+
+## 📝 Contribution Notes
+If you want to add a new dependency to the project:
+1. Make sure the license is **compatible** with this project's main license.
+
+2. Avoid dependencies with highly restrictive licenses (strong copyleft) unless approved by the team.
+
+3. Update this file (`DEPENDENCIES.md`) along with your pull request.
