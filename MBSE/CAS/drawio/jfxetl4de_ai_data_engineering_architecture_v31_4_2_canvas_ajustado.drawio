@@ -1,0 +1,52 @@
+<mxfile host="Electron" agent="Mozilla/5.0">
+  <diagram id="SGlROgtm2bRK6yUxU8QB" name="Evolución Simplificada">
+    <mxGraphModel dx="1099" dy="531" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;" value="JFXETL4DE — Evolución simplificada hacia AI Data Engineering" vertex="1">
+          <mxGeometry height="50" width="1320" x="40" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;" value="De ETL/ELT tradicional a una plataforma de datos agentic, gobernada y orientada a productos de datos" vertex="1">
+          <mxGeometry height="35" width="1200" x="100" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" value="&lt;b&gt;1. Foundation&lt;/b&gt;&lt;br&gt;Fuentes → Ingestion&lt;br&gt;Airbyte / NiFi / Camel&lt;br&gt;Contratos + calidad" vertex="1">
+          <mxGeometry height="170" width="205" x="40" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" value="&lt;b&gt;2. Lakehouse&lt;/b&gt;&lt;br&gt;Paimon / Delta&lt;br&gt;Object Storage&lt;br&gt;DuckDB / Dremio" vertex="1">
+          <mxGeometry height="170" width="205" x="260" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" value="&lt;b&gt;3. AI Data Plane&lt;/b&gt;&lt;br&gt;LLM open source&lt;br&gt;RAG + Qdrant&lt;br&gt;Agentes + MCP" vertex="1">
+          <mxGeometry height="170" width="205" x="480" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" value="&lt;b&gt;4. Agentic ETL&lt;/b&gt;&lt;br&gt;NL → Pipeline&lt;br&gt;Generación SQL&lt;br&gt;Optimización + validación" vertex="1">
+          <mxGeometry height="170" width="205" x="700" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;5. Data Products&lt;/b&gt;&lt;br&gt;APIs + BI&lt;br&gt;Feature / AI datasets&lt;br&gt;Lineage + catálogo" vertex="1">
+          <mxGeometry height="170" width="205" x="920" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;" value="&lt;b&gt;6. Governance&lt;/b&gt;&lt;br&gt;RBAC + políticas&lt;br&gt;Auditoría + SBOM&lt;br&gt;Human-in-the-loop" vertex="1">
+          <mxGeometry height="170" width="205" x="1140" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;Streaming&lt;/b&gt;&lt;br&gt;Pulsar / Kafka&lt;br&gt;CDC + eventos" vertex="1">
+          <mxGeometry height="115" width="205" x="150" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;Processing&lt;/b&gt;&lt;br&gt;Spark / Beam&lt;br&gt;SQL / Python" vertex="1">
+          <mxGeometry height="115" width="205" x="380" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;Semantic&lt;/b&gt;&lt;br&gt;OWL + metadata&lt;br&gt;Data catalog / lineage" vertex="1">
+          <mxGeometry height="115" width="205" x="610" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;Observability&lt;/b&gt;&lt;br&gt;OpenTelemetry&lt;br&gt;Metrics + traces" vertex="1">
+          <mxGeometry height="115" width="205" x="840" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=13;" value="&lt;b&gt;Deployment&lt;/b&gt;&lt;br&gt;Docker / Kubernetes&lt;br&gt;CI/CD + GitOps" vertex="1">
+          <mxGeometry height="115" width="205" x="1070" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="F4kG2OtvX_Ytt9pzuY1y-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" value="&lt;b&gt;Resultado&lt;/b&gt;&lt;br&gt;Plataforma AI Data Engineering:&lt;br&gt;ingesta confiable + lakehouse + agentes + datos gobernados + entrega JIT" vertex="1">
+          <mxGeometry height="125" width="900" x="250" y="630" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
