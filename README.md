@@ -1,13 +1,4 @@
-# JFXETL4DE — AI-Powered Data Engineering Platform
 
-![JFXETL4DE](https://img.shields.io/badge/JFXETL4DE-AI%20Data%20Engineering-blue)
-![Open Source](https://img.shields.io/badge/Open%20Source-Software-brightgreen)
-![Data Engineering](https://img.shields.io/badge/Data-Engineering-orange)
-![AI](https://img.shields.io/badge/AI-Agentic%20Data%20Engineering-purple)
-![ETL](https://img.shields.io/badge/ETL-ELT-yellow)
-![Streaming](https://img.shields.io/badge/Streaming-Event%20Driven-red)
-![Lakehouse](https://img.shields.io/badge/Lakehouse-Open%20Architecture-blue)
-![MBSE](https://img.shields.io/badge/MBSE-CAD%20%2F%20CAM%20%2F%20CAS-lightgrey)
 <p align="center">
   <img src="data-intelligence-architecture.jpg"
        alt="JFXETL4DE — Data Intelligence Architecture"
@@ -17,6 +8,18 @@
 <p align="center">
   <em>Open-source architecture for Data Engineering, ETL/ELT, streaming, lakehouse, AI agents, analytics, engineering data and digital twins.</em>
 </p>
+
+
+# AI-Powered Data Engineering Platform
+
+![JFXETL4DE](https://img.shields.io/badge/JFXETL4DE-AI%20Data%20Engineering-blue)
+![Open Source](https://img.shields.io/badge/Open%20Source-Software-brightgreen)
+![Data Engineering](https://img.shields.io/badge/Data-Engineering-orange)
+![AI](https://img.shields.io/badge/AI-Agentic%20Data%20Engineering-purple)
+![ETL](https://img.shields.io/badge/ETL-ELT-yellow)
+![Streaming](https://img.shields.io/badge/Streaming-Event%20Driven-red)
+![Lakehouse](https://img.shields.io/badge/Lakehouse-Open%20Architecture-blue)
+![MBSE](https://img.shields.io/badge/MBSE-CAD%20%2F%20CAM%20%2F%20CAS-lightgrey)
 
 ## Overview
 
