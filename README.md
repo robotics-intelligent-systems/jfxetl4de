@@ -10,7 +10,7 @@
 </p>
 
 
-# AI-Powered Data Engineering Platform
+# AI-Powered Data Engineering and Data Integration Platform
 
 ![JFXETL4DE](https://img.shields.io/badge/JFXETL4DE-AI%20Data%20Engineering-blue)
 ![Open Source](https://img.shields.io/badge/Open%20Source-Software-brightgreen)
@@ -48,6 +48,143 @@ Rather than attempting to replace specialized tools with a single platform, JFXE
 The long-term objective is to explore the evolution from traditional **ETL pipelines** toward an integrated:
 
 > **Data Engineering + AI Engineering + Agentic Data + Engineering Data platform.**
+
+---
+
+## Integrated development block: Data Integration Library
+
+JFXETL4DE adopts [`sdk2035/data-integration-library`](https://github.com/sdk2035/data-integration-library) as an optional connector-composition block for the Data Engineering, ETL/ELT and enterprise-integration layers. The component repository contains the LinkedIn Data Integration Library (DIL), a collection of generic protocol and data-format components that can be composed into connectors for cloud services, APIs, files and databases. Its upstream README describes use with data-integration frameworks such as [Apache Gobblin](https://gobblin.apache.org/) and event-processing systems such as [Apache Kafka](https://kafka.apache.org/).
+
+The block complements the broader JFXETL4DE compendium. JFXETL4DE remains responsible for pipeline design, data contracts, quality, lineage, lakehouse storage, streaming integration, AI agents, observability and deployment. DIL is responsible for reusable source/extractor, processor, converter and target-side connector behavior. Neither project is replaced by the other.
+
+### Capabilities brought into JFXETL4DE
+
+- **Protocol and format separation.** Protocol-oriented source classes can be combined with format and processing components without hard-wiring every cloud API to one data format.
+- **Multi-stage integration.** A job can list, prepare, partition, extract, normalize, validate, compress or encrypt data across multiple stages.
+- **Bidirectional flows.** Ingress and egress use the same component model, so the same integration contract can move data into or out of a system.
+- **Connector coverage.** The documented source layer includes HTTP, HDFS, JDBC, SFTP and S3-oriented sources. Documented component pages include Avro, CSV, JSON, file-dump, gzip, validation, normalization and S3 processing.
+- **Large-data controls.** Flexible pagination, work units, backfill, watermarks, asynchronous ingestion and two-step download/ingestion patterns help break large transfers into observable tasks.
+- **Extensible protection.** Compression and encryption are pluggable stages. Secret handling, key management and access policy remain JFXETL4DE deployment responsibilities.
+
+### Reference flow
+
+```mermaid
+flowchart TB
+    S["HTTP, HDFS, JDBC, SFTP, S3 and APIs"] --> D["DIL connector composition block"]
+    D --> P["Multi-stage extraction, pagination, normalization and validation"]
+    P --> O["JFXETL4DE orchestration, streaming and data contracts"]
+    O --> T["Lakehouse, warehouses, APIs, analytics and engineering data"]
+```
+
+AI agents, RAG and data-quality services may propose or validate configuration around this flow. Execution remains controlled by a reviewed pipeline definition, credential policy and human-approved release.
+
+### Responsibility boundary
+
+| Area | Data Integration Library block | JFXETL4DE platform |
+|---|---|---|
+| Source access | Protocol-specific connections and extractors | Credential policy, secret references, network policy and provider ownership |
+| Data movement | Work units, pagination, staged transfer and egress behavior | Scheduling, retry policy, event routing, dead-letter handling and reconciliation |
+| Format and processing | Extractor, converter, normalizer, validation, compression and encryption extension points | Canonical schemas, data contracts, quality rules, classification and lineage |
+| Consumption | Connector output to a downstream framework or target | Lakehouse, streaming, analytics, AI/RAG, simulation and engineering-data products |
+| Operations | Component logs and task status exposed by the adapter | Metrics, traces, alerts, cost controls, model evaluation and incident response |
+
+### Integration contract
+
+The adapter should expose DIL jobs through a stable JFXETL4DE envelope. The envelope carries control metadata while the payload remains owned by the selected extractor or converter.
+
+```yaml
+run_id: unique-run-identifier
+work_unit_id: partition-or-page-identifier
+source:
+  protocol: http|hdfs|jdbc|sftp|s3
+  connector: implementation-name
+  resource: logical-resource-reference
+stage: list|prepare|extract|convert|validate|egress
+schema_version: contract-version
+event_time: source-event-time
+ingest_time: platform-ingest-time
+payload_ref: object-or-stream-reference
+checksum: content-integrity-value
+quality_state: pending|passed|quarantined|failed
+provenance: source-and-transformation-record
+security_classification: public|internal|confidential|restricted
+```
+
+The adapter must be idempotent for a `(run_id, work_unit_id, stage)` key, preserve provider request identifiers, and distinguish `pending`, `ready`, `processed`, `quarantined`, `failed` and `cancelled`. A failed work unit can be retried without falsely marking the complete dataset as successful.
+
+### Patterns to implement first
+
+1. **Asynchronous ingestion:** submit a provider preparation request, persist its tracking identifier, poll or receive a status update, and extract when the provider reports readiness.
+2. **Two-step file download:** list objects into a staging manifest, then download each object with independent checksums and retry state.
+3. **Two-step large ingestion:** extract a bounded set of partition values, create work units, then ingest partitions in parallel or over recurring runs.
+4. **Validated egress:** send normalized records to an API or data service, track the response and retain rejected records for review.
+
+These patterns are documented by DIL and map directly to JFXETL4DE requirements for repeatability, backfill, quality and lineage. The implementation should cite the relevant DIL guide and add an integration test for each pattern.
+
+### Runtime and build compatibility
+
+The component repository is Gradle-based, includes the `cdi-core` subproject and publishes version `0.2.119` in its current `version.properties`. Its README requires **JDK 8** and states that JDK 11 or later is not supported. This is a compatibility constraint to verify in CI, not a promise about future releases.
+
+JFXETL4DE can integrate the block in three ways:
+
+| Option | When to use | Trade-off |
+|---|---|---|
+| In-process Java adapter | The selected JFXETL4DE runtime can execute the DIL-compatible Java level | Lowest latency, tighter dependency coupling |
+| Dedicated connector worker | The main platform uses a newer JVM or another language | Clear isolation and independent rollout, with a protocol boundary |
+| Maintained compatibility branch | A long-term product requires newer runtime support | More maintenance, tests and upstream coordination |
+
+The MVP should use a dedicated adapter or worker until a reproducible build confirms runtime compatibility. The adapter must not silently claim that a provider API is supported when the current implementation only performs a documented handoff.
+
+### AI-assisted data engineering around DIL
+
+The JFXETL4DE AI layer may provide:
+
+- natural-language generation of a draft DIL job from an approved source and target contract;
+- mapping suggestions between source fields and a versioned canonical schema;
+- pagination, partition and work-unit recommendations based on observed volumes;
+- data-quality explanations and quarantine summaries;
+- RAG answers grounded in DIL component guides, JFXETL4DE contracts and provider documentation;
+- impact analysis for schema, connector or dependency changes.
+
+Agents must not receive raw secrets, invent connector capabilities, bypass validation, change retention policy or publish a pipeline without an approval record. Every generated configuration stores model, prompt, source documents, reviewer, test result and release version.
+
+### Observability and failure handling
+
+Each DIL-backed task should emit `run_id`, `work_unit_id`, connector, stage, source, target, record count, byte count, latency, retry count, provider request ID, checksum result and final state. JFXETL4DE aggregates these signals into pipeline-level dashboards for throughput, freshness, completeness, quality, cost and failure recovery.
+
+Required failure paths include expired credentials, provider throttling, pagination gaps, duplicate pages, malformed records, schema drift, checksum mismatch, encryption failure, partial egress, lost status updates and unavailable downstream storage. Quarantine and replay must preserve provenance.
+
+### License and dependency policy
+
+The component repository includes the [BSD 2-Clause license](https://github.com/sdk2035/data-integration-library/blob/master/LICENSE) and a [NOTICE](https://github.com/sdk2035/data-integration-library/blob/master/NOTICE) referring to LinkedIn Corporation. JFXETL4DE must preserve those notices when distributing the block, document the integration version and publish an SBOM. Every transitive dependency, model, dataset, container and connector must be reviewed separately; the BSD 2-Clause license does not make all surrounding components identical.
+
+### Delivery plan
+
+| Phase | Deliverable | Exit criterion |
+|---|---|---|
+| 1. Compatibility spike | Build `cdi-core` under the documented JDK/Gradle constraints and wrap one source plus one converter | Reproducible CI build, license inventory and one end-to-end fixture |
+| 2. Contract adapter | Implement the JFXETL4DE envelope, idempotency, provenance, metrics and quarantine | Async, two-step file and partitioned-ingestion tests pass |
+| 3. Platform integration | Connect the adapter to the selected orchestrator, Kafka-compatible bus or lakehouse target | Replay, backfill, schema drift and partial failure are observable |
+| 4. AI assistance | Add RAG-grounded job drafting, mapping suggestions and data-quality explanations | Human approval, source citations, refusal and rollback tests pass |
+| 5. Production hardening | Isolate secrets, add SLOs, SBOM, security scanning, capacity tests and provider runbooks | Operational owner signs off before any production connector is enabled |
+
+### Open decisions
+
+- Select the first source/target pair and confirm that its API, file or database terms permit the intended use.
+- Choose in-process Java 8 execution or a dedicated connector worker based on the host runtime.
+- Define the canonical schema and the schema-registry strategy for Avro, JSON and columnar interchange.
+- Decide whether Kafka-compatible events, an outbox or direct orchestration carries status updates in the MVP.
+- Assign owners for credentials, data quality, incident response, license review and provider reconciliation.
+- Add the DIL version, source commit, patches and test results to the JFXETL4DE dependency register.
+
+### Source references
+
+- [JFXETL4DE — AI-Powered Data Engineering Platform](https://github.com/robotics-intelligent-systems/jfxetl4de)
+- [JFXETL4DE README](https://github.com/robotics-intelligent-systems/jfxetl4de/blob/main/README.md)
+- [Data Integration Library component repository](https://github.com/sdk2035/data-integration-library)
+- [Data Integration Library README](https://github.com/sdk2035/data-integration-library/blob/master/README.md)
+- [DIL component guide](https://github.com/sdk2035/data-integration-library/tree/master/docs/components)
+- [DIL flow design patterns](https://github.com/sdk2035/data-integration-library/tree/master/docs/patterns)
 
 ---
 
@@ -212,6 +349,7 @@ The following technologies represent the main technology families considered by 
 | **Apache NiFi** | Visual dataflow and integration |
 | **Apache Camel Karavan** | Integration and workflow design |
 | **Airbyte** | Data integration and replication |
+| **Data Integration Library (DIL)** | Composable protocol, extractor, converter and multi-stage connector block |
 | **n8n** | Workflow automation |
 | **Apache Beam** | Unified batch and streaming pipelines |
 | **Apache DolphinScheduler** | Workflow orchestration |
@@ -602,6 +740,8 @@ jfxetl4de/
 │   ├── streaming/
 │   └── mbse/
 │
+├── integrations/
+│   └── data-integration-library/
 ├── etl/
 ├── streaming/
 ├── lakehouse/
@@ -861,7 +1001,14 @@ A formal Software Bill of Materials (**SBOM**) is recommended for production dis
 
 ---
 
+
+### Integrated component
+
+The DIL block is distributed under the [BSD 2-Clause license](https://github.com/sdk2035/data-integration-library/blob/master/LICENSE) with its accompanying [NOTICE](https://github.com/sdk2035/data-integration-library/blob/master/NOTICE). Preserve these notices, record the selected version and publish an SBOM for any distribution.
+
 # Project Information
+
+**Integrated development block:** [sdk2035/data-integration-library](https://github.com/sdk2035/data-integration-library) — generic connector composition for protocols, formats, multi-stage ingestion and egress.
 
 ## Main Repository
 
@@ -921,3 +1068,6 @@ JFXETL4DE explores the convergence of:
 The resulting architecture provides a foundation for experimentation with **open-source Data Engineering, AI Engineering, Agentic AI, Lakehouse architectures, scientific computing, simulation, MBSE, CAD/CAM/CAS, and Digital Twins**.
 
 The core principle is to build an ecosystem where specialized open technologies can be integrated through well-defined interfaces rather than forcing all workloads into a single monolithic platform.
+
+The Data Integration Library block supplies reusable connector composition inside the data-integration boundary, while JFXETL4DE governs orchestration, contracts, quality, lineage, AI assistance and lakehouse products.
+
